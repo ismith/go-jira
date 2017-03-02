@@ -535,6 +535,10 @@ func (c *Cli) FindIssues() (interface{}, error) {
 		query = qbuff.String()
 	}
 
+   if assignee, ok := c.opts["assignee"]; ok {
+        query = query + fmt.Sprintf(" AND assignee = '%s'", assignee)
+   }
+
 	fields := []string{"summary"}
 	if qf, ok := c.opts["queryfields"].(string); ok {
 		fields = strings.Split(qf, ",")
